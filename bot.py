@@ -2,12 +2,14 @@ from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, ContextTypes
 from supabase import create_client
 import logging
+import os
 
 # ======= CONFIG =======
 BOT_TOKEN = "6870953348:AAEFkEPhdkV1fcFrzKvc203LjmYgsjB9mog"
 SUPABASE_URL = "https://cbdrjkxlyxijcvlypcvw.supabase.co"
 SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNiZHJqa3hseXhpamN2bHlwY3Z3Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1MTk0Mjg2NiwiZXhwIjoyMDY3NTE4ODY2fQ.twQPq5ULhhrCoOWfnSZjVdU-atLeA3chuR22RKC6ahI"
 ADMIN_CHAT_ID = 76514915 
+PORT = int(os.environ.get("PORT", "8443"))
 
 supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
 logging.basicConfig(level=logging.INFO)
@@ -177,7 +179,8 @@ def main():
     # Run bot with webhook
     app.run_webhook(
         listen="0.0.0.0",
-        port=8080,
+        port=int(PORT),
+        url_path="webhook",
         webhook_url="https://yandaoyqchatbot-withered-snowflake-335.fly.dev/webhook"
     )
 
