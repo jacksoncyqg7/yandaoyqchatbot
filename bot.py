@@ -174,6 +174,12 @@ def main():
     app = Application.builder().token(BOT_TOKEN).build()
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CallbackQueryHandler(button_handler))
+    # Run bot with webhook
+    app.run_webhook(
+        listen="0.0.0.0",
+        port=8080,
+        webhook_url="https://yandaoyqchatbot-withered-snowflake-335.fly.dev/webhook"
+    )
 
 if __name__ == "__main__":
     main()
